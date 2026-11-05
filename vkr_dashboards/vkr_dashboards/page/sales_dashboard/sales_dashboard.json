@@ -1,0 +1,36 @@
+{
+ "content": null,
+ "creation": "2026-10-08 16:30:00.000000",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "chart-line",
+ "idx": 0,
+ "modified": "2026-10-08 16:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "VKR Dashboards",
+ "name": "sales-dashboard",
+ "owner": "Administrator",
+ "page_name": "sales-dashboard",
+ "roles": [
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Sales Dashboard"
+}
