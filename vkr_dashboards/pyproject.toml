@@ -1,0 +1,15 @@
+[project]
+name = "vkr_dashboards"
+authors = [{ name = "VKR Holdings", email = "lubaina@vkrholdings.com" }]
+description = "Sales, Purchase, Stock and HR dashboards using only standard ERPNext Dashboards, Charts and Number Cards"
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = []
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=15.0.0,<17.0.0"

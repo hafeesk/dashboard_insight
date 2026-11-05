@@ -1,0 +1,3 @@
+include MANIFEST.in requirements.txt *.json *.md *.py *.txt
+recursive-include vkr_dashboards *.css *.csv *.html *.ico *.js *.json *.md *.png *.py *.svg *.txt
+recursive-exclude vkr_dashboards *.pyc

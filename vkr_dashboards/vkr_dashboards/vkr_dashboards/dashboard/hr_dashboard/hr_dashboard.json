@@ -1,0 +1,57 @@
+{
+ "cards": [
+  {
+   "card": "Headcount"
+  },
+  {
+   "card": "Joined This Month"
+  },
+  {
+   "card": "Joined This Year"
+  },
+  {
+   "card": "Left This Month"
+  },
+  {
+   "card": "Left This Year"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Employees Joined Over Time",
+   "width": "Half"
+  },
+  {
+   "chart": "Employees Left Over Time",
+   "width": "Half"
+  },
+  {
+   "chart": "Headcount by Department",
+   "width": "Half"
+  },
+  {
+   "chart": "Headcount by Designation",
+   "width": "Half"
+  },
+  {
+   "chart": "Employees by Employment Type",
+   "width": "Half"
+  },
+  {
+   "chart": "Employees by Gender",
+   "width": "Half"
+  }
+ ],
+ "creation": "2026-11-05 00:00:00.000000",
+ "dashboard_name": "HR Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2026-11-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "VKR Dashboards",
+ "name": "HR Dashboard",
+ "owner": "Administrator"
+}
