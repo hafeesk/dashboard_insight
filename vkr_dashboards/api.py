@@ -156,7 +156,7 @@ def get_sales(from_date=None, to_date=None, company=None):
 		so = "select sum(base_net_total) from `tabSales Order` where docstatus = 1 and transaction_date between %(f)s and %(t)s" + cc
 		kpis.append(_kpi("orders", _("Orders booked"), _val(so, dict(a, f=p.from_date, t=p.to_date)), _val(so, dict(a, f=p.prev_from, t=p.prev_to))))
 		if "trend" in charts:
-			_, _l, vals = _series(
+			_keys, _l, vals = _series(
 				"select date_format(transaction_date, '{fmt}'), sum(base_net_total) from `tabSales Order` "
 				"where docstatus = 1 and transaction_date between %(from)s and %(to)s" + cc + " group by 1", a, p, None)
 			charts["trend"]["datasets"].append({"name": _("Orders booked"), "values": vals})
@@ -229,7 +229,7 @@ def get_purchase(from_date=None, to_date=None, company=None):
 			"and status not in ('Closed', 'On Hold', 'Completed') and transaction_date <= %(to)s" + cc
 			+ " order by schedule_date asc limit %(n)s", dict(a, n=TOP), as_dict=True)
 		if "trend" in charts:
-			_, _l, vals = _series(
+			_keys, _l, vals = _series(
 				"select date_format(transaction_date, '{fmt}'), sum(base_net_total) from `tabPurchase Order` "
 				"where docstatus = 1 and transaction_date between %(from)s and %(to)s" + cc + " group by 1", a, p, None)
 			charts["trend"]["datasets"].append({"name": _("Orders placed"), "values": vals})
@@ -282,8 +282,8 @@ def get_stock(from_date=None, to_date=None, company=None):
 		kpis.insert(2, _kpi("issued", _("Value issued"), _val(out, cur), _val(out, prv), good="none"))
 		base = ("from `tabStock Ledger Entry` s join `tabWarehouse` w on w.name = s.warehouse where s.is_cancelled = 0 "
 			"and s.posting_date between %(from)s and %(to)s" + wc)
-		_, labels, vin = _series("select date_format(s.posting_date, '{fmt}'), sum(s.stock_value_difference) " + base + " and s.actual_qty > 0 group by 1", a, p, None)
-		_, _l, vout = _series("select date_format(s.posting_date, '{fmt}'), -sum(s.stock_value_difference) " + base + " and s.actual_qty < 0 group by 1", a, p, None)
+		_keys, labels, vin = _series("select date_format(s.posting_date, '{fmt}'), sum(s.stock_value_difference) " + base + " and s.actual_qty > 0 group by 1", a, p, None)
+		_keys, _l, vout = _series("select date_format(s.posting_date, '{fmt}'), -sum(s.stock_value_difference) " + base + " and s.actual_qty < 0 group by 1", a, p, None)
 		charts["movement"] = {"labels": labels, "datasets": [{"name": _("Received"), "values": vin}, {"name": _("Issued"), "values": vout}]}
 		tables["top_moving"] = frappe.db.sql(
 			"select s.item_code, max(i.item_name) item_name, -sum(s.actual_qty) qty, -sum(s.stock_value_difference) amount "
@@ -335,9 +335,9 @@ def get_hr(from_date=None, to_date=None, company=None):
 			"and (relieving_date is null or relieving_date > %(to)s) and status != 'Inactive'" + cc
 			+ " group by department order by v desc limit 10", dict(a, none=_("No department"))), _("Employees"))
 		charts["by_department"]["labels"] = [_strip_abbr(l) for l in charts["by_department"]["labels"]]
-		_, labels, vj = _series("select date_format(date_of_joining, '{fmt}'), count(*) from `tabEmployee` "
+		_keys, labels, vj = _series("select date_format(date_of_joining, '{fmt}'), count(*) from `tabEmployee` "
 			"where date_of_joining between %(from)s and %(to)s" + cc + " group by 1", a, p, None)
-		_, _l, vx = _series("select date_format(relieving_date, '{fmt}'), count(*) from `tabEmployee` "
+		_keys, _l, vx = _series("select date_format(relieving_date, '{fmt}'), count(*) from `tabEmployee` "
 			"where relieving_date between %(from)s and %(to)s" + cc + " group by 1", a, p, None)
 		charts["movement"] = {"labels": labels, "datasets": [{"name": _("Joined"), "values": vj}, {"name": _("Left"), "values": vx}]}
 		tables["joiners"] = frappe.db.sql(
